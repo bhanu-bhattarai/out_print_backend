@@ -1,6 +1,6 @@
 local setup guides.
 
-1) install python
+1) install python and django
 
 
 2) create the database connection on mysql
