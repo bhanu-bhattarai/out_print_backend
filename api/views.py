@@ -390,13 +390,13 @@ class ConnectWithUsViewSet(viewsets.ModelViewSet):
 @api_view(["GET"])
 def get_qr_code(request):
     qrCode = models.QrCode.objects.all()
-    serializer_qr = QrCodeSerializer(qrCode, many=True)
-    return JsonResponse(serializer_qr.data, status=200,safe=False)
+    serializer_qr = QrCodeSerializer(qrCode, many = True)
+    return Response(serializer_qr.data, status = 200)
 
 @api_view(["POST"])
 def save_qr_code(request):
     serializer_qr = QrCodeSerializer(data=request.data)
     if serializer_qr.is_valid():
         serializer_qr.save()
-        return JsonResponse({'status': 'Successful'}, status=201)
-    return JsonResponse({'status': 'failure'}, status=400)
+        return Response( "Successful", status = 201)
+    return Response("failure", status=400)
