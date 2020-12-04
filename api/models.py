@@ -223,24 +223,16 @@ class QrCode(models.Model):
     count = models.CharField(max_length=60, blank=True, default="", null=True)
     image = models.CharField(max_length=60, blank=True, default="", null=True)
     redirection_url = models.CharField(max_length=60, blank=True, default="", null=True)
+    is_active = models.BooleanField(default=True, null=True)
 
     class Meta:
         db_table = 'qr_code'
-
-class Material(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    name =  models.CharField(max_length=60, blank=True, default="", null=True)
-    qr_code = models.ForeignKey(QrCode, on_delete=models.CASCADE)
-    
-    class Meta:
-        db_table = 'material'
 
 class UserQrOrder(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     created_on = models.DateTimeField(auto_now_add=True)
     qr_code = models.ForeignKey(QrCode, on_delete=models.CASCADE)
     is_scanned = models.BooleanField(default=False, null=True)
-    material = models.ForeignKey(Material, on_delete=models.CASCADE)
     
     class Meta:
         db_table = 'user_qr_order'
