@@ -35,5 +35,7 @@ urlpatterns = router.urls + [
     path('staff_users_create/', user_views.staff_user_create),
     path('verify-payment/', views.verify_payment),
     path('get-qr-codes/', views.get_qr_code),
-    path('save-qr-codes/', views.save_qr_code),
+    path('delete-qr-codes/<str:pk>/', views.delete_qr_code),
+    path('update-qr-codes/<str:pk>/', views.update_qr_code),
+    path('scan-qr-code/', views.scan_qr_code),
 ]

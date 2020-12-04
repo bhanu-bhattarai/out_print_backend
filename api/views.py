@@ -389,8 +389,8 @@ class ConnectWithUsViewSet(viewsets.ModelViewSet):
 
 @api_view(["GET"])
 def get_qr_code(request):
-    qrCode = models.QrCode.objects.all()
-    serializer_qr = QrCodeSerializer(qrCode, many = True)
+    qr_code = models.QrCode.objects.all()
+    serializer_qr = QrCodeSerializer(qr_code, many = True)
     return Response(serializer_qr.data, status = 200)
 
 @api_view(["POST"])
@@ -400,3 +400,28 @@ def save_qr_code(request):
         serializer_qr.save()
         return Response( "Successful", status = 201)
     return Response("failure", status=400)
+
+@api_view(["POST"])
+def update_qr_code(request,pk):
+    qr_code = models.QrCode.objects.get(pk=pk)
+    serializer_qr = QrCodeSerializer(instance = qr_code,data=request.data)
+    if serializer_qr.is_valid():
+        serializer_qr.save()
+        return Response( "Successful", status = 201)
+    return Response("failure", status=400)
+
+
+@api_view(["DELETE"])
+def delete_qr_code(request,pk):
+    qr_code = models.QrCode.objects.get(pk=pk)
+    qr_code.delete()
+    return Response( "Successful", status = 201)
+
+@api_view(["POST"])
+def scan_qr_code(request):
+   qr_code = request.data.get('qr_code')
+   user_id = request.data.get('user_id')
+   qr_code = models.QrCode.objects.filter(code=qr_code).get()
+   serializer_qr = QrCodeSerializer(qr_code)
+   return Response(serializer_qr.data, status = 200)
+

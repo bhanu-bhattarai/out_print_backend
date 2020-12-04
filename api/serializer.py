@@ -118,3 +118,14 @@ class QrCodeSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.QrCode
         fields = '__all__'
+
+
+class UserQrOrderSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.UserQrOrder
+        fields = '__all__'
+
+class MaterialSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Material
+        fields = '__all__'
