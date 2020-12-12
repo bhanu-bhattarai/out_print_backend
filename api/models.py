@@ -215,7 +215,7 @@ class ConnectWithUs(models.Model):
 
 
 class QrCode(models.Model):
-    code = models.IntegerField()
+    code = models.CharField(max_length=5, blank=True, default="", null=True)
     generated_date = models.DateTimeField(auto_now_add=True)
     value = models.CharField(max_length=60, blank=True, default="", null=True)
     validity = models.DateTimeField(max_length=30, null=True, blank=True)
